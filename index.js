@@ -8,18 +8,13 @@ let state = {
 };
 
 // Setting up HTML Strings input
-let htmlString = `
-<div>
-<h1>Rock, Paper, Scissor</h1><br>
-${getMessage()}
-<div class="main">
-${renderWeapons()}
-</div>
-</div>`
+
+    // this have moved into render();
 
 // Message Center
 function getMessage(){
-    const {winner, loser, tie} =state;
+console.log('state.winner :>> ', state.winner);
+    const {winner, loser, tie} = state;
     if (winner) {
         return `You have won! <br> [Play Again]<br>`
     } else if (loser){
@@ -30,19 +25,15 @@ function getMessage(){
         return `Please select your weapon!`
     }
     
-    console.log('winner :>> ', winner);
-    console.log('loser :>> ', loser);
+
 }
 
 // Setting up panel with paper, rock, scissor
 function renderWeapons(){
     let weaponsHtml = "";
     state.weapons.forEach(function (weapon, index) {
-        console.log('weapon :>> ', weapon);
-        console.log('index :>> ', index);
         weaponsHtml += `<div class='panel' onclick='weaponSelected(${index})'>${weapon}</div>`;
     })
-    console.log('weaponsHtml :>> ', weaponsHtml);
     return weaponsHtml;
 }
 
@@ -50,11 +41,10 @@ function renderWeapons(){
 
 function weaponSelected(index){
     //Checking to make sure its being clicked and returned with index
-    console.log('index :>> ', index);
     computerindex = computerSelect()
-    console.log('computerindex :>> ', computerindex);
     compareWeapons(index,computerindex)
     //Need to figure out how to pass and print the choice and winner
+
 }
 
 // Computer Random pick one of the above (random of index location)
@@ -68,18 +58,17 @@ console.log('playeri :>> ', playeri);
 console.log('computeri :>> ', computeri);
 
 if (playeri === computeri) {
-    tie = true
-    console.log('tie :>> ', tie);
+    state.tie = true
+    render();
 } else if ((playeri == '0' && computeri == '2')|| 
 (playeri == '1' && computeri == '0')||
 (playeri == '2' && computeri == '1')) {
-    winner = true
-    console.log('winner :>> ', winner);
-} else {
-    loser=true
-    console.log('loser :>> ', loser);
-}
+    state.winner = true
     render();
+} else {
+    state.loser=true
+    render();
+}
 }
 
 // Winner Counter
@@ -88,7 +77,15 @@ if (playeri === computeri) {
 
 // Render
 function render() {
-  
+    let htmlString = `
+        <div>
+        <h1>Rock, Paper, Scissor</h1><br>
+        ${getMessage()}
+        <div class="main">
+        ${renderWeapons()}
+        </div>
+        </div>`;
+
     document.getElementById("app").innerHTML=htmlString;
 }
 
