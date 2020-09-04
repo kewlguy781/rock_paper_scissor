@@ -4,6 +4,7 @@ let state = {
     weapons: ["Paper", "Scissor", "Rock"],
     winner: false,
     loser: false,
+    tie: false,
 };
 
 // Setting up HTML Strings input
@@ -18,12 +19,13 @@ ${renderWeapons()}
 
 // Message Center
 function getMessage(){
-    const {winner, loser} =state;
+    const {winner, loser, tie} =state;
     if (winner) {
-        return `You have won! <br>
-        [Play Again]<br>`
+        return `You have won! <br> [Play Again]<br>`
     } else if (loser){
-        return `you lost!`
+        return `you lost!<br> [Play Again]<br>`
+    } else if (tie){
+        return `Tie! The computer selected the same weapon as you do! [Play Again]`
     } else {
         return `Please select your weapon!`
     }
@@ -51,6 +53,8 @@ function weaponSelected(index){
     console.log('index :>> ', index);
     computerindex = computerSelect()
     console.log('computerindex :>> ', computerindex);
+    compareWeapons(index,computerindex)
+    //Need to figure out how to pass and print the choice and winner
 }
 
 // Computer Random pick one of the above (random of index location)
@@ -59,6 +63,24 @@ return Math.floor(Math.random()*3)
 }
 
 // Compare, and see if player win, else, computer win
+function compareWeapons(playeri,computeri){
+console.log('playeri :>> ', playeri);
+console.log('computeri :>> ', computeri);
+
+if (playeri === computeri) {
+    tie = true
+    console.log('tie :>> ', tie);
+} else if ((playeri == '0' && computeri == '2')|| 
+(playeri == '1' && computeri == '0')||
+(playeri == '2' && computeri == '1')) {
+    winner = true
+    console.log('winner :>> ', winner);
+} else {
+    loser=true
+    console.log('loser :>> ', loser);
+}
+    render();
+}
 
 // Winner Counter
 
