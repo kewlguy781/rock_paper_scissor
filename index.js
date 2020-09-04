@@ -15,7 +15,6 @@ ${getMessage()}
 ${renderWeapons()}
 </div>
 </div>`
-//  Put it in line 15 after done with weapon function
 
 // Message Center
 function getMessage(){
@@ -47,7 +46,17 @@ function renderWeapons(){
 
 // Setting up Paper, Rock, Scissor Click Link (including index location)
 
+function weaponSelected(index){
+    //Checking to make sure its being clicked and returned with index
+    console.log('index :>> ', index);
+    computerindex = computerSelect()
+    console.log('computerindex :>> ', computerindex);
+}
+
 // Computer Random pick one of the above (random of index location)
+function computerSelect(){
+return Math.floor(Math.random()*3)
+}
 
 // Compare, and see if player win, else, computer win
 
