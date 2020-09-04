@@ -12,10 +12,10 @@ let htmlString = `
 <h1>Rock, Paper, Scissor</h1><br>
 ${getMessage()}
 <div class="main">
-
+${renderWeapons()}
 </div>
 </div>`
-// ${renderWeapons} Put it in line 15
+//  Put it in line 15 after done with weapon function
 
 // Message Center
 function getMessage(){
@@ -33,7 +33,17 @@ function getMessage(){
     console.log('loser :>> ', loser);
 }
 
-// Setting up Array with paper, rock, scissor
+// Setting up panel with paper, rock, scissor
+function renderWeapons(){
+    let weaponsHtml = "";
+    state.weapons.forEach(function (weapon, index) {
+        console.log('weapon :>> ', weapon);
+        console.log('index :>> ', index);
+        weaponsHtml += `<div class='panel' onclick='weaponSelected(${index})'>${weapon}</div>`;
+    })
+    console.log('weaponsHtml :>> ', weaponsHtml);
+    return weaponsHtml;
+}
 
 // Setting up Paper, Rock, Scissor Click Link (including index location)
 
