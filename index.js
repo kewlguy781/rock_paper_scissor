@@ -8,6 +8,8 @@ let state = {
     winnercounter: "0",
     losercounter: "0",
     drawcounter: "0",
+    computerindex: "4",
+    index: "4"
 };
 
 // Setting up HTML Strings input
@@ -50,7 +52,9 @@ function renderWeapons(){
 
 function weaponSelected(index){
     //Checking to make sure its being clicked and returned with index
+    state.index=index
     computerindex = computerSelect()
+    state.computerindex=computerindex
     compareWeapons(index,computerindex)
 
 }
@@ -87,12 +91,13 @@ console.log('computeri :>> ', computeri);
 
 // Result
 function renderResult(){
-    let resultHtml=`The computer select: <br><br>
-        the player select: 
+    let resultHtml=`The computer select: ${state.weapons[state.computerindex]} <br><br>
+        The player select: ${state.weapons[state.index]} 
+        <br><br><br>
         
-        Winner counter: 
-        Player: ${state.winnercounter}
-        Computer: ${state.losercounter}
+        Winner counter: <br>
+        Player: ${state.winnercounter}<br>
+        Computer: ${state.losercounter}<br>
         Draw: ${state.drawcounter}`;
 
     return resultHtml;
